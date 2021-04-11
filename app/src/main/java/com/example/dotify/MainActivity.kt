@@ -21,5 +21,6 @@ class MainActivity : AppCompatActivity() {
         Log.i("nc", "Next has been clicked")
 
         Toast.makeText(this, "Skipping to previous track", Toast.LENGTH_SHORT).show()
+
     }
 }
