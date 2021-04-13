@@ -41,7 +41,6 @@ class MainActivity : AppCompatActivity() {
         Log.i("prev", "prev has been clicked")
 
         Toast.makeText(this, "Skipping to previous track", Toast.LENGTH_SHORT).show()
-
     }
 
     fun cuClicked(view:View){
