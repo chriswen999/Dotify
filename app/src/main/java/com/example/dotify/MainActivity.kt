@@ -59,7 +59,9 @@ class MainActivity : AppCompatActivity() {
         } else {
             userInputtedUserName.setVisibility(View.GONE);
             userName.setVisibility(View.VISIBLE);
-            userName.text = userInputtedText
+            if(userInputtedText != "") {
+                userName.text = userInputtedText
+            }
             buttonName.text = "Change User"
             cu = true;
         }
