@@ -8,7 +8,7 @@ This is the next big music app and too sad it cannot play music yet.
 NA
 
 ## Screenshots
-<img src="./ss1.jpg" alt="Screenshot of the app" height="500" />
+<img src="./ss1.png" alt="Screenshot of the app" height="500" />
 
-<img src="./ss2.jpg" alt="Screenshot of the app" height="500" />
+<img src="./ss2.png" alt="Screenshot of the app" height="500" />
 
