@@ -1,24 +1,47 @@
 package com.example.dotify
 
+import android.content.Context
+import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import java.security.AccessController.getContext
+import androidx.core.content.ContextCompat.startActivity
+import com.ericchee.songdataprovider.Song
+import com.example.dotify.databinding.ActivityPlayerDetailBinding
 import kotlin.random.Random
 
-class MainActivity : AppCompatActivity() {
+fun navigateToPlayerDetailActivity(context: Context, song: Song){
+    val intent = Intent(context, PlayerDetailActivity::class.java).apply{
+        val bundle = Bundle().apply {
+            putParcelable("theSong", song)
+        }
+        putExtras(bundle)
+    }
+    context.startActivity( intent )
+}
+
+class PlayerDetailActivity : AppCompatActivity() {
     private val randomNumber = Random.nextInt(1000, 50000)
     private lateinit var tvPlayText : TextView
     private var playNum : Int = 0
     private var cu : Boolean = true;
+    private lateinit var binding: ActivityPlayerDetailBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+
+        binding = ActivityPlayerDetailBinding.inflate(layoutInflater).apply{setContentView(root)}
+        with(binding){
+            val song: Song? = intent.getParcelableExtra<Song>("theSong")
+            if (song?.largeImageID != null) {
+                albumPic.setImageResource(song.largeImageID)
+            }
+            songName.text = song?.title.toString()
+            artistName.text = song?.artist.toString()
+        }
 
         playNum = randomNumber;
         tvPlayText = findViewById<TextView>(R.id.tvPlayNum)
@@ -30,20 +53,7 @@ class MainActivity : AppCompatActivity() {
         inputtedText.setVisibility(View.GONE);
     }
 
-    fun nextClick(view:View){
-        Log.i("next", "Next has been clicked")
-
-        Toast.makeText(this, "Skipping to next track", Toast.LENGTH_SHORT).show()
-    }
-
-
-    fun prevClick(view: View) {
-        Log.i("prev", "prev has been clicked")
-
-        Toast.makeText(this, "Skipping to previous track", Toast.LENGTH_SHORT).show()
-    }
-
-    fun cuClicked(view:View){
+    fun cuClicked(view: View){
         Log.i("cu", "Change User has been clicked")
 
         val userInputtedUserName = findViewById<TextView>(R.id.userInputtedUserName)
@@ -65,10 +75,6 @@ class MainActivity : AppCompatActivity() {
             buttonName.text = "Change User"
             cu = true;
         }
-
-
-
-
     }
 
     fun playClick(view: View){
@@ -76,5 +82,16 @@ class MainActivity : AppCompatActivity() {
         tvPlayText.text = "$playNum plays"
     }
 
+    fun nextClick(view:View){
+        Log.i("next", "Next has been clicked")
 
+        Toast.makeText(this, "Skipping to next track", Toast.LENGTH_SHORT).show()
+    }
+
+
+    fun prevClick(view: View) {
+        Log.i("prev", "prev has been clicked")
+
+        Toast.makeText(this, "Skipping to previous track", Toast.LENGTH_SHORT).show()
+    }
 }
