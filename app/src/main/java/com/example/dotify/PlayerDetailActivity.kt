@@ -5,13 +5,16 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
-import androidx.core.content.ContextCompat.startActivity
 import com.ericchee.songdataprovider.Song
 import com.example.dotify.databinding.ActivityPlayerDetailBinding
 import kotlin.random.Random
+
+private const val COUNT_VALUE_KEY = "COUNT_VALUE_KEY"
 
 fun navigateToPlayerDetailActivity(context: Context, song: Song){
     val intent = Intent(context, PlayerDetailActivity::class.java).apply{
@@ -34,13 +37,30 @@ class PlayerDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         binding = ActivityPlayerDetailBinding.inflate(layoutInflater).apply{setContentView(root)}
-        with(binding){
+        val view = binding.root
+        setContentView(view)
+        with(binding) {
             val song: Song? = intent.getParcelableExtra<Song>("theSong")
             if (song?.largeImageID != null) {
                 albumPic.setImageResource(song.largeImageID)
             }
-            songName.text = song?.title.toString()
-            artistName.text = song?.artist.toString()
+            if (song != null) {
+                songName.text = song?.title.toString()
+                artistName.text = song?.artist.toString()
+            }
+            btnSetting.setOnClickListener {
+                if (song != null) {
+                    startSetting(
+                        this@PlayerDetailActivity,
+                        song.largeImageID,
+                        song.title,
+
+                        playNum.toString()
+                    )
+                }
+
+            }
+            supportActionBar?.setDisplayHomeAsUpEnabled(true)
         }
 
         playNum = randomNumber;
@@ -49,33 +69,33 @@ class PlayerDetailActivity : AppCompatActivity() {
         tvPlayText.text = "$playNum plays"
 
 
-        val inputtedText = findViewById<TextView>(R.id.userInputtedUserName);
-        inputtedText.setVisibility(View.GONE);
+
+
     }
 
-    fun cuClicked(view: View){
-        Log.i("cu", "Change User has been clicked")
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.settings_menu_items, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
 
-        val userInputtedUserName = findViewById<TextView>(R.id.userInputtedUserName)
-        val userName = findViewById<TextView>(R.id.userName)
-        val buttonName = findViewById<TextView>(R.id.cuButton)
-        var userInputtedText = userInputtedUserName.text.toString()
-        if(cu){
-            userInputtedUserName.setVisibility(View.VISIBLE);
-            userName.setVisibility(View.GONE);
-            buttonName.text = "Apply"
-            userInputtedUserName.setText("")
-            cu = false;
-        } else {
-            userInputtedUserName.setVisibility(View.GONE);
-            userName.setVisibility(View.VISIBLE);
-            if(userInputtedText != "") {
-                userName.text = userInputtedText
-            }
-            buttonName.text = "Change User"
-            cu = true;
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            R.id.searchItem -> Toast.makeText(this, "Search clicked", Toast.LENGTH_SHORT).show()
         }
+        return super.onOptionsItemSelected(item)
     }
+
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return super.onSupportNavigateUp()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putInt(COUNT_VALUE_KEY, playNum)
+        super.onSaveInstanceState(outState)
+    }
+
+
 
     fun playClick(view: View){
         playNum = playNum + 1;

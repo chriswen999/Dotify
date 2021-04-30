@@ -9,13 +9,13 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/cuButton"
+        android:id="@+id/btnSetting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#939191"
-        android:backgroundTint="#CCCACA"
+        android:background="#03A9F4"
+        android:backgroundTint="#3F51B5"
         android:onClick="cuClicked"
-        android:text="CHANGE USER"
+        android:text="SETTINGS"
         android:textColor="@color/black"
         android:textSize="15sp"
         app:layout_constraintBottom_toTopOf="@+id/albumPic"
@@ -119,26 +119,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/artistName"
         app:layout_constraintVertical_bias="0.058"  />
-
-    <EditText
-        android:id="@+id/userInputtedUserName"
-        android:layout_width="122dp"
-        android:layout_height="46dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:textSize="22dp"
-        app:layout_constraintStart_toStartOf="@+id/albumPic"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/userName"
-        android:layout_width="144dp"
-        android:layout_height="42dp"
-        android:text="first_avenger"
-        android:textColor="#050505"
-        android:textSize="22dp"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="4dp"
-        tools:layout_editor_absoluteY="6dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
