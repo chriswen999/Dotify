@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/settingFragment">
+
+    <fragment
+        android:id="@+id/settingFragment"
+        android:name="com.example.dotify.SettingsFragment"
+        android:label="fragment_setting"
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_settingFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_settingFragment_to_aboutFragment"
+            app:destination="@id/aboutFragment" />
+        <action
+            android:id="@+id/action_settingFragment_to_statisticsFragment"
+            app:destination="@id/statisticsFragment" />
+        <argument
+            android:name="playCount"
+            app:argType="string"
+            android:defaultValue="0" />
+        <argument
+            android:name="title"
+            app:argType="string"
+            android:defaultValue="Song" />
+        <argument
+            android:name="imgURL"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.dotify.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.example.dotify.AboutFragment"
+        android:label="fragment_about"
+        tools:layout="@layout/fragment_about" />
+    <fragment
+        android:id="@+id/statisticsFragment"
+        android:name="com.example.dotify.StatisticsFragment"
+        android:label="fragment_statistics"
+        tools:layout="@layout/fragment_statistics">
+        <argument
+            android:name="playCount"
+            app:argType="string"
+            android:defaultValue="0" />
+        <argument
+            android:name="imgURL"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <argument
+            android:name="title"
+            app:argType="string"
+            android:defaultValue="Song" />
+    </fragment>
+
+</navigation>
