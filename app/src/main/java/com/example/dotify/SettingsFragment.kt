@@ -19,8 +19,6 @@ class SettingsFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val binding = FragmentSettingsBinding.inflate(inflater)
-
-
         val imgURL = safeArgs.imgURL
         val title = safeArgs.title
         val playCount = safeArgs.playCount

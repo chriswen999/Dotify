@@ -21,7 +21,9 @@ class SettingsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_settings)
 
         navController.setGraph(R.navigation.nav_graph, intent.extras)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         setupActionBarWithNavController(navController)
+
 
     }
     override fun onSupportNavigateUp() = navController.navigateUp()
@@ -30,7 +32,7 @@ class SettingsActivity : AppCompatActivity() {
 fun startSetting(context: Context, imgURL: Int, title: String, playCount: String) = with(context) {
     val intent = Intent(context, SettingsActivity::class.java).apply {
         val bundle = Bundle().apply {
-            putInt("ImgURL", imgURL)
+            putInt("imgURL", imgURL)
             putString("title", title)
             putString("playCount", playCount)
 

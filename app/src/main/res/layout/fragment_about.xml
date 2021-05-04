@@ -7,7 +7,7 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/developer"
+        android:id="@+id/tvDeveloper"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Yixuan Wen"
@@ -15,14 +15,14 @@
         android:paddingTop="30dp"/>
 
     <TextView
-        android:id="@+id/versionNumber"
+        android:id="@+id/tvVersionNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="30sp"
         android:paddingTop="30dp"/>
 
     <TextView
-        android:id="@+id/university"
+        android:id="@+id/tvUniversity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="University of Washington"
@@ -30,7 +30,7 @@
         android:paddingTop="30dp"/>
 
     <TextView
-        android:id="@+id/major"
+        android:id="@+id/tvMajor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="30dp"

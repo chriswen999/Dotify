@@ -16,7 +16,9 @@ class StatisticsFragment : Fragment() {
         val binding = FragmentStatisticsBinding.inflate(inflater)
 
         with(binding) {
-            ivAlbumPic.setImageResource(safeArgs.imgURL)
+
+            val imgSource = safeArgs.imgURL
+            ivAlbumPic.setImageResource(imgSource)
             val title = safeArgs.title
             val songPlayCount = safeArgs.playCount
             tvPlayCount.text = "$title has been Played: $songPlayCount times"

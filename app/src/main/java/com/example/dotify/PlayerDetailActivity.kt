@@ -27,10 +27,9 @@ fun navigateToPlayerDetailActivity(context: Context, song: Song){
 }
 
 class PlayerDetailActivity : AppCompatActivity() {
-    private val randomNumber = Random.nextInt(1000, 50000)
+    private var playNum = Random.nextInt(1000, 50000)
     private lateinit var tvPlayText : TextView
-    private var playNum : Int = 0
-    private var cu : Boolean = true;
+    //private var playNum : Int = 0
     private lateinit var binding: ActivityPlayerDetailBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,17 +37,21 @@ class PlayerDetailActivity : AppCompatActivity() {
 
         binding = ActivityPlayerDetailBinding.inflate(layoutInflater).apply{setContentView(root)}
         val view = binding.root
-        setContentView(view)
         with(binding) {
             val song: Song? = intent.getParcelableExtra<Song>("theSong")
+            if(savedInstanceState != null) {
+                playNum = savedInstanceState.getInt(COUNT_VALUE_KEY, 0)
+            }
             if (song?.largeImageID != null) {
                 albumPic.setImageResource(song.largeImageID)
             }
             if (song != null) {
                 songName.text = song?.title.toString()
                 artistName.text = song?.artist.toString()
+
             }
             btnSetting.setOnClickListener {
+
                 if (song != null) {
                     startSetting(
                         this@PlayerDetailActivity,
@@ -59,11 +62,12 @@ class PlayerDetailActivity : AppCompatActivity() {
                     )
                 }
 
+
             }
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
         }
 
-        playNum = randomNumber;
+        //playNum = randomNumber;
         tvPlayText = findViewById<TextView>(R.id.tvPlayNum)
 
         tvPlayText.text = "$playNum plays"
