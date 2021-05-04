@@ -11,3 +11,11 @@ I completed the 1 and 2 extra credits
 <img src="./ss1.png" alt="Screenshot of the app" height="500" />
 
 <img src="./ss2.png" alt="Screenshot of the app" height="500" />
+
+<img src="./ss3.png" alt="Screenshot of the app" height="500" />
+
+<img src="./ss4.png" alt="Screenshot of the app" height="500" />
+
+<img src="./ss5.png" alt="Screenshot of the app" height="500" />
+
+<img src="./ss6.png" alt="Screenshot of the app" height="500" />
