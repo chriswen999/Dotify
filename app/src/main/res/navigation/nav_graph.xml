@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/settingFragment"
-        android:name="com.example.dotify.SettingsFragment"
+        android:name="com.example.dotify.fragment.SettingsFragment"
         android:label="fragment_setting"
         tools:layout="@layout/fragment_settings" >
         <action
@@ -20,10 +20,6 @@
             android:id="@+id/action_settingFragment_to_statisticsFragment"
             app:destination="@id/statisticsFragment" />
         <argument
-            android:name="playCount"
-            app:argType="string"
-            android:defaultValue="0" />
-        <argument
             android:name="title"
             app:argType="string"
             android:defaultValue="Song" />
@@ -34,23 +30,19 @@
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.dotify.ProfileFragment"
+        android:name="com.example.dotify.fragment.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/aboutFragment"
-        android:name="com.example.dotify.AboutFragment"
+        android:name="com.example.dotify.fragment.AboutFragment"
         android:label="fragment_about"
         tools:layout="@layout/fragment_about" />
     <fragment
         android:id="@+id/statisticsFragment"
-        android:name="com.example.dotify.StatisticsFragment"
+        android:name="com.example.dotify.fragment.StatisticsFragment"
         android:label="fragment_statistics"
         tools:layout="@layout/fragment_statistics">
-        <argument
-            android:name="playCount"
-            app:argType="string"
-            android:defaultValue="0" />
         <argument
             android:name="imgURL"
             app:argType="integer"

@@ -1,12 +1,12 @@
-package com.example.dotify
+package com.example.dotify.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.dotify.BuildConfig
 import com.example.dotify.databinding.FragmentAboutBinding
-import com.example.dotify.databinding.FragmentProfileBinding
 
 //
 

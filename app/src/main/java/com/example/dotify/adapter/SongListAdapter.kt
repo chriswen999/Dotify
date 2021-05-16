@@ -1,10 +1,11 @@
-package com.example.dotify
+package com.example.dotify.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.ericchee.songdataprovider.Song
+
 import com.example.dotify.databinding.ItemPersonBinding
+import com.example.dotify.model.Song
 
 class SongListAdapter(private var listOfSongs: List<Song>): RecyclerView.Adapter<SongListAdapter.personViewHolder>() {
     private lateinit var binding: ItemPersonBinding

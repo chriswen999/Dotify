@@ -1,4 +1,4 @@
-package com.example.dotify
+package com.example.dotify.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

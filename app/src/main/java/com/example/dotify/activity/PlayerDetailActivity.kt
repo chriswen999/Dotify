@@ -1,4 +1,4 @@
-package com.example.dotify
+package com.example.dotify.activity
 
 import android.content.Context
 import android.content.Intent
@@ -10,37 +10,52 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
-import com.ericchee.songdataprovider.Song
+import com.example.dotify.DotifyApplication
+import com.example.dotify.R
 import com.example.dotify.databinding.ActivityPlayerDetailBinding
+import com.example.dotify.manager.SongManager
+import com.example.dotify.model.Song
+
 import kotlin.random.Random
 
 private const val COUNT_VALUE_KEY = "COUNT_VALUE_KEY"
 
-fun navigateToPlayerDetailActivity(context: Context, song: Song){
-    val intent = Intent(context, PlayerDetailActivity::class.java).apply{
-        val bundle = Bundle().apply {
-            putParcelable("theSong", song)
-        }
-        putExtras(bundle)
-    }
-    context.startActivity( intent )
+fun navigateToPlayerDetailActivity(context: Context){
+    val intent = Intent(context, PlayerDetailActivity::class.java)
+    // .apply{
+        //val bundle = Bundle().apply {
+            //putParcelable("theSong", song)
+        //}
+        //putExtras(bundle)
+    //}
+
+    //context.startActivity( intent )
+    context.startActivity(intent )
 }
 
 class PlayerDetailActivity : AppCompatActivity() {
     private var playNum = Random.nextInt(1000, 50000)
     private lateinit var tvPlayText : TextView
-    //private var playNum : Int = 0
     private lateinit var binding: ActivityPlayerDetailBinding
+    lateinit var dotifyApp: DotifyApplication
+    lateinit var songManager: SongManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+
         binding = ActivityPlayerDetailBinding.inflate(layoutInflater).apply{setContentView(root)}
-        val view = binding.root
+
+        dotifyApp = this.applicationContext as DotifyApplication
+        dotifyApp.playCount = playNum
+        this.songManager = dotifyApp.songManager
+
         with(binding) {
-            val song: Song? = intent.getParcelableExtra<Song>("theSong")
+            val song: Song? = songManager.selectedSong
+            //val song: Song? = intent.getParcelableExtra<Song>("theSong")
             if(savedInstanceState != null) {
                 playNum = savedInstanceState.getInt(COUNT_VALUE_KEY, 0)
+                dotifyApp.playCount = playNum
             }
             if (song?.largeImageID != null) {
                 albumPic.setImageResource(song.largeImageID)
@@ -58,7 +73,7 @@ class PlayerDetailActivity : AppCompatActivity() {
                         song.largeImageID,
                         song.title,
 
-                        playNum.toString()
+                        //playNum.toString()
                     )
                 }
 
@@ -103,6 +118,7 @@ class PlayerDetailActivity : AppCompatActivity() {
 
     fun playClick(view: View){
         playNum = playNum + 1;
+        dotifyApp.playCount = playNum
         tvPlayText.text = "$playNum plays"
     }
 

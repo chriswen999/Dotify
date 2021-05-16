@@ -1,4 +1,4 @@
-package com.example.dotify
+package com.example.dotify.activity
 
 import android.content.Context
 import android.content.Intent
@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.example.dotify.R
 
 class SettingsActivity : AppCompatActivity() {
 
@@ -29,12 +30,12 @@ class SettingsActivity : AppCompatActivity() {
     override fun onSupportNavigateUp() = navController.navigateUp()
 }
 
-fun startSetting(context: Context, imgURL: Int, title: String, playCount: String) = with(context) {
+fun startSetting(context: Context, imgURL: Int, title: String) = with(context) {
     val intent = Intent(context, SettingsActivity::class.java).apply {
         val bundle = Bundle().apply {
             putInt("imgURL", imgURL)
             putString("title", title)
-            putString("playCount", playCount)
+
 
         }
         putExtras(bundle)
