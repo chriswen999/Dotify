@@ -7,12 +7,14 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View.VISIBLE
 import androidx.constraintlayout.widget.ConstraintLayout
+
 import androidx.lifecycle.lifecycleScope
 import com.ericchee.songdataprovider.SongDataProvider
 import com.example.dotify.DotifyApplication
 import com.example.dotify.adapter.SongListAdapter
 import com.example.dotify.databinding.SongListActivityBinding
 import com.example.dotify.manager.SongManager
+import com.example.dotify.model.AllSongs
 import com.example.dotify.model.Song
 import kotlinx.coroutines.launch
 
@@ -28,37 +30,44 @@ class SongListActivity : AppCompatActivity() {
     private lateinit var binding: SongListActivityBinding
     private var theSong : Song? = null
     lateinit var songManager: SongManager
+    //private lateinit var adapter: SongListAdapter
+    private lateinit var newSongs: List<Song>
 
     private val dotifyApp: DotifyApplication by lazy { application as DotifyApplication }
     private val dataRepository by lazy { dotifyApp.dataRepository }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        Log.i("next", "haha")
         super.onCreate(savedInstanceState)
         binding = SongListActivityBinding.inflate(layoutInflater).apply { setContentView(root) }
 
-        this.songManager = dotifyApp.songManager
 
-        val allSongs = listOf<Song>()
+
+        Log.i("next", "inside")
 
 
 
         with(binding) {
-            //val songs = SongDataProvider.getAllSongs()
-            val adapter = SongListAdapter(allSongs)
+
+            newSongs = listOf()
+
+            val adapter = SongListAdapter(newSongs)
             rvPeople.adapter = adapter
 
-            Log.i("next", "out")
+
+            songManager = dotifyApp.songManager
+
+
 
             lifecycleScope.launch {
-                Log.i("next", "inside")
-                val songs = dataRepository.getSong()
-                Log.i("next", "inside111")
-                val newSongs = listOf(songs)
-                Log.i("next", "$newSongs Next has been clicked")
-                Log.i("next", "inside2222")
+
+                val allsongs: AllSongs = dataRepository.getAllSongs()
+
+                newSongs = allsongs.songs
 
                 adapter.updatePeople(newSongs)
             }
+
 
             adapter.onPersonClickListener = { song ->
                 songManager.onSongSelected(song)
@@ -79,7 +88,7 @@ class SongListActivity : AppCompatActivity() {
             }
 
             btnShuffle.setOnClickListener{
-                adapter.updatePeople(allSongs.toMutableList().shuffled())
+                adapter.updatePeople(newSongs.toMutableList().shuffled())
             }
         }
 
@@ -114,4 +123,5 @@ class SongListActivity : AppCompatActivity() {
         outState.putParcelable(THE_SONG, theSong)
         super.onSaveInstanceState(outState)
     }
+
 }
