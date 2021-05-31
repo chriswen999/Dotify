@@ -22,7 +22,7 @@ class SongListAdapter(private var listOfSongs: List<Song>): RecyclerView.Adapter
         with(holder.binding){
             tvName.text = song.title
             tvArtist.text = song.artist
-            profilePic.setImageResource(song.smallImageID)
+            profilePic.setImageResource(song.smallImageURL)
 
             itemRoot.setOnClickListener{
                 onPersonClickListener(song)

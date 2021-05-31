@@ -10,6 +10,6 @@ data class Song(
     val title: String,
     val artist: String,
     val durationMillis: Long,
-    val smallImageID: Int,
-    val largeImageID: Int
+    val smallImageURL: Int,
+    val largeImageURL: Int
 ) : Parcelable

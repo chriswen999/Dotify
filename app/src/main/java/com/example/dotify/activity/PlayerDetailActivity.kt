@@ -37,6 +37,7 @@ class PlayerDetailActivity : AppCompatActivity() {
     private var playNum = Random.nextInt(1000, 50000)
     private lateinit var tvPlayText : TextView
     private lateinit var binding: ActivityPlayerDetailBinding
+
     lateinit var dotifyApp: DotifyApplication
     lateinit var songManager: SongManager
 
@@ -57,8 +58,8 @@ class PlayerDetailActivity : AppCompatActivity() {
                 playNum = savedInstanceState.getInt(COUNT_VALUE_KEY, 0)
                 dotifyApp.playCount = playNum
             }
-            if (song?.largeImageID != null) {
-                albumPic.setImageResource(song.largeImageID)
+            if (song?.largeImageURL != null) {
+                albumPic.load(song.largeImageURL)
             }
             if (song != null) {
                 songName.text = song?.title.toString()
@@ -70,7 +71,7 @@ class PlayerDetailActivity : AppCompatActivity() {
                 if (song != null) {
                     startSetting(
                         this@PlayerDetailActivity,
-                        song.largeImageID,
+                        song.largeImageURL,
                         song.title,
 
                         //playNum.toString()
