@@ -62,4 +62,6 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'com.ericchee:songdataprovider:1.0.5'
 
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+
 }

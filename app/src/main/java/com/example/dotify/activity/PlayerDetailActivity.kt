@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import coil.load
 import android.widget.TextView
 import android.widget.Toast
 import com.example.dotify.DotifyApplication
@@ -36,6 +37,7 @@ fun navigateToPlayerDetailActivity(context: Context){
 class PlayerDetailActivity : AppCompatActivity() {
     private var playNum = Random.nextInt(1000, 50000)
     private lateinit var tvPlayText : TextView
+
     private lateinit var binding: ActivityPlayerDetailBinding
 
     lateinit var dotifyApp: DotifyApplication
@@ -65,6 +67,12 @@ class PlayerDetailActivity : AppCompatActivity() {
                 songName.text = song?.title.toString()
                 artistName.text = song?.artist.toString()
 
+            }
+            swipeToRefreshLayout?.setOnRefreshListener {
+                if (song?.largeImageURL != null) {
+                    albumPic.load(song.largeImageURL)
+                }
+                swipeToRefreshLayout.isRefreshing = false
             }
             btnSetting.setOnClickListener {
 

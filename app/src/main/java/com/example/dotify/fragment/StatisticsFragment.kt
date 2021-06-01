@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.navArgs
+import coil.load
 import com.example.dotify.DotifyApplication
 
 import com.example.dotify.databinding.FragmentStatisticsBinding
@@ -21,7 +22,7 @@ class StatisticsFragment : Fragment() {
         with(binding) {
 
             val imgSource = safeArgs.imgURL
-            ivAlbumPic.setImageResource(imgSource)
+            ivAlbumPic.load(imgSource)
             val title = safeArgs.title
             val songPlayCount = dotifyApp.playCount
             tvPlayCount.text = "$title has been Played: $songPlayCount times"
