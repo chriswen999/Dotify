@@ -19,19 +19,21 @@ import com.example.dotify.model.Song
 
 import kotlin.random.Random
 
+
+const val SONG_INFO_KEY = "SONG_INFO_KEY"
 private const val COUNT_VALUE_KEY = "COUNT_VALUE_KEY"
 
 fun navigateToPlayerDetailActivity(context: Context){
     val intent = Intent(context, PlayerDetailActivity::class.java)
-    // .apply{
+        //.apply{
         //val bundle = Bundle().apply {
             //putParcelable("theSong", song)
         //}
         //putExtras(bundle)
     //}
 
-    //context.startActivity( intent )
-    context.startActivity(intent )
+    context.startActivity( intent )
+
 }
 
 class PlayerDetailActivity : AppCompatActivity() {

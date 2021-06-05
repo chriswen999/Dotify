@@ -5,6 +5,7 @@ import android.widget.Toast
 import com.ericchee.songdataprovider.Song
 import com.ericchee.songdataprovider.SongDataProvider
 import com.example.dotify.manager.SongManager
+import com.example.dotify.manager.SongNotificationManager
 import com.example.dotify.repository.DataRepository
 
 //import com.example.dotify.model.Song
@@ -13,6 +14,7 @@ class DotifyApplication: Application() {
 
     var playCount: Int = 0
     lateinit var dataRepository: DataRepository
+    lateinit var notificationManager: SongNotificationManager
 
     val  songManager: SongManager by lazy { SongManager() }
 
@@ -25,6 +27,8 @@ class DotifyApplication: Application() {
         super.onCreate()
 
         dataRepository = DataRepository()
+
+        this.notificationManager = SongNotificationManager(this)
 
     }
 }
