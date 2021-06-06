@@ -34,10 +34,10 @@ class SongNotificationManager(
         // Define the intent or action you want when user taps on notification
         val intent = Intent(context, PlayerDetailActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            //putExtra(SONG_INFO_KEY, selectedSong)
+ /*           putExtra(SONG_INFO_KEY, selectedSong)
             if (selectedSong != null) {
                 dotifyApp.songManager.onSongSelected(selectedSong)
-            }
+            }*/
         }
         val pendingIntent: PendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT) // dont forget to add PendingIntent.FLAG_UPDATE_CURRENT to send data over
 
