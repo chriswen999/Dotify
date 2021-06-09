@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View.VISIBLE
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.edit
 
 import androidx.lifecycle.lifecycleScope
 import com.ericchee.songdataprovider.SongDataProvider
@@ -14,6 +15,7 @@ import com.example.dotify.DotifyApplication
 import com.example.dotify.adapter.SongListAdapter
 import com.example.dotify.databinding.SongListActivityBinding
 import com.example.dotify.manager.SongManager
+import com.example.dotify.manager.SongNotificationManager
 import com.example.dotify.model.AllSongs
 import com.example.dotify.model.Song
 import kotlinx.coroutines.launch
@@ -24,7 +26,7 @@ fun navigateToSongListActivity(context: Context) = with(context) {
 }
 
 private const val THE_SONG = "theSong"
-
+const val NOTIFICATIONS_ENABLED_PREF_KEY = "NOTIFICATIONS_ENABLED"
 
 class SongListActivity : AppCompatActivity() {
     private lateinit var binding: SongListActivityBinding
@@ -33,8 +35,14 @@ class SongListActivity : AppCompatActivity() {
     //private lateinit var adapter: SongListAdapter
     private lateinit var newSongs: List<Song>
 
+
     private val dotifyApp: DotifyApplication by lazy { application as DotifyApplication }
     private val dataRepository by lazy { dotifyApp.dataRepository }
+    private val songNotificationManager: SongNotificationManager by lazy { dotifyApp.notificationManager }
+
+    private val refreshSongManager by lazy {dotifyApp.refreshSongManager}
+
+    private val preferences by lazy { dotifyApp.preferences }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         Log.i("next", "haha")
@@ -48,17 +56,23 @@ class SongListActivity : AppCompatActivity() {
 
 
         with(binding) {
+            switchNotification.isChecked =  preferences.getBoolean(NOTIFICATIONS_ENABLED_PREF_KEY, false)
+            songNotificationManager.notificationEnabled = preferences.getBoolean(NOTIFICATIONS_ENABLED_PREF_KEY, false)
+
+            switchNotification.setOnCheckedChangeListener { _, isChecked ->
+                songNotificationManager.notificationEnabled = switchNotification.isChecked
+                preferences.edit { putBoolean(NOTIFICATIONS_ENABLED_PREF_KEY, isChecked) }
+
+                if (isChecked) {
+                    refreshSongManager.startRefreshSongsPeriodically()
+                }
+            }
 
             newSongs = listOf()
 
             val adapter = SongListAdapter(newSongs)
             rvPeople.adapter = adapter
-
-
             songManager = dotifyApp.songManager
-
-
-
             lifecycleScope.launch {
 
                 val allsongs: AllSongs = dataRepository.getAllSongs()

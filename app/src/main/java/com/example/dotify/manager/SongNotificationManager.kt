@@ -22,6 +22,7 @@ class SongNotificationManager(
 ) {
     private val notificationManager = NotificationManagerCompat.from(context)
     private val dotifyApp: DotifyApplication = context.applicationContext as DotifyApplication
+    var notificationEnabled = true
 
     init {
         // Initialize all channels
@@ -29,6 +30,9 @@ class SongNotificationManager(
     }
 
     fun publishNewSongNotification() {
+        if(!notificationEnabled){
+            return
+        }
         var selectedSong: Song? = dotifyApp.songManager.selectedSong
 
         // Define the intent or action you want when user taps on notification

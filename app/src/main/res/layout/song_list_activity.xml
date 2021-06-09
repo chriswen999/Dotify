@@ -23,16 +23,13 @@
 
     <LinearLayout
         android:id="@+id/llMiniPlayer"
-        android:visibility="invisible"
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/rvPeople"
-        >
+        app:layout_constraintVertical_bias="1.0">
 
         <TextView
             android:id="@+id/tvMiniPlayer"
@@ -47,12 +44,18 @@
 
         <Button
             android:id="@+id/btnShuffle"
-            android:layout_width="wrap_content"
+            android:layout_width="184dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:background="@color/purple_200"
             android:text="Shuffle"
             android:visibility="visible" />
+
+        <Switch
+            android:id="@+id/switchNotification"
+            android:layout_width="147dp"
+            android:layout_height="match_parent"
+            android:layout_weight="wrap_content" />
 
     </LinearLayout>
 

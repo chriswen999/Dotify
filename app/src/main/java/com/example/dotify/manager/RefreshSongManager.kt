@@ -12,7 +12,7 @@ class RefreshSongManager(context: Context) {
 
     private val workManager: WorkManager = WorkManager.getInstance(context)
 
-    fun refreshEmails() {
+    fun refreshSongs() {
 
         val request = OneTimeWorkRequestBuilder<SongRefreshWorker>()
             .setInitialDelay(5, TimeUnit.SECONDS)
@@ -27,7 +27,7 @@ class RefreshSongManager(context: Context) {
         workManager.enqueue(request)
     }
 
-    fun startRefreshEmailsPeriodically() {
+    fun startRefreshSongsPeriodically() {
         if (isSongRefreshRunning()) {
             return
         }
